@@ -12,6 +12,7 @@ import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-success';
 import { register } from '@/actions/register';
 import { capitalizeWords } from '@/lib/utils';
+import { TbReload } from 'react-icons/tb';
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>('');
@@ -52,24 +53,6 @@ export const RegisterForm = () => {
           <div className="space-y-4">
             <FormField
               control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="john.doe@example.com"
-                      type="email"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
@@ -88,6 +71,26 @@ export const RegisterForm = () => {
                 </FormItem>
               )}
             />
+
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder="john.doe@example.com"
+                      type="email"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             <FormField
               control={form.control}
               name="password"
@@ -114,6 +117,12 @@ export const RegisterForm = () => {
             className="w-full"
             disabled={isPending}
           >
+            {isPending && (
+              <TbReload
+                className="mr-2 size-4 animate-spin"
+                aria-hidden="true"
+              />
+            )}
             Create an account
           </Button>
         </form>
