@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-success';
 import { register } from '@/actions/register';
+import { capitalizeWords } from '@/lib/utils';
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>('');
@@ -80,6 +81,7 @@ export const RegisterForm = () => {
                       placeholder="John Doe"
                       type="name"
                       className="capitalize"
+                      onChange={(event) => field.onChange(capitalizeWords(event.target.value))}
                     />
                   </FormControl>
                   <FormMessage />
