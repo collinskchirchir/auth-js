@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-success';
 import { login } from '@/actions/login';
+import { LuLoader2 } from "react-icons/lu";
 
 export const LoginForm = () => {
   const [error, setError] = useState<string | undefined>('');
@@ -30,8 +31,7 @@ export const LoginForm = () => {
     startTransistion(() => {
       login(values)
         .then((data) => {
-          setError(data.error);
-          setSuccess(data.success);
+          setError(data?.error);
         });
     });
   };
@@ -92,6 +92,12 @@ export const LoginForm = () => {
             className="w-full"
             disabled={isPending}
           >
+            {isPending && (
+              <LuLoader2
+                className="mr-2 size-4 animate-spin"
+                aria-hidden="true"
+              />
+            )}
             Login
           </Button>
         </form>

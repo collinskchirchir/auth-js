@@ -12,7 +12,7 @@ import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-success';
 import { register } from '@/actions/register';
 import { capitalizeWords } from '@/lib/utils';
-import { TbReload } from 'react-icons/tb';
+import { LuLoader2 } from 'react-icons/lu';
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>('');
@@ -118,7 +118,7 @@ export const RegisterForm = () => {
             disabled={isPending}
           >
             {isPending && (
-              <TbReload
+              <LuLoader2
                 className="mr-2 size-4 animate-spin"
                 aria-hidden="true"
               />
