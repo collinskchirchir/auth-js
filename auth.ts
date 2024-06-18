@@ -10,15 +10,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   session: { strategy: 'jwt' },
   pages: {
     signIn: '/auth/login',
-    error: '/auth/error'
+    error: '/auth/error',
   },
   events: {
-    async linkAccount({user}) {
+    // email verified automatically filled for OAuth accounts
+    async linkAccount({ user }) {
       await db.user.update({
-        where: {id: user.id},
-        data: {emailVerified: new Date()}
-      })
-    }
+        where: { id: user.id },
+        data: { emailVerified: new Date() },
+      });
+    },
   },
   callbacks: {
     /** Prevent signin if email is not verified
