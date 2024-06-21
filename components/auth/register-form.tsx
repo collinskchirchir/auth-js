@@ -117,13 +117,17 @@ export const RegisterForm = () => {
             className="w-full"
             disabled={isPending}
           >
-            {isPending && (
-              <LuLoader2
-                className="mr-2 size-4 animate-spin"
-                aria-hidden="true"
-              />
+            {isPending ? (
+              <>
+                <LuLoader2
+                  className="mr-2 size-4 animate-spin"
+                  aria-hidden="true"
+                />
+                Creating account...
+              </>
+            ) : (
+              <>Create an account</>
             )}
-            Create an account
           </Button>
         </form>
       </Form>
