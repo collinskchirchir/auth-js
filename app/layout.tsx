@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import './globals.css';
 import { auth } from '@/auth';
 import { SessionProvider } from 'next-auth/react';
+import {Toaster} from '@/components/ui/sooner'
 
 
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ export default async function RootLayout({
     <SessionProvider session={session}>
       <html lang="en">
       <body className={cn(inter.variable, lexendDeca.variable, 'font-inter')}>
+      <Toaster />
       {children}
       </body>
       </html>
