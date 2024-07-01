@@ -13,7 +13,9 @@ import { FormSuccess } from '@/components/form-success';
 import { register } from '@/actions/register';
 import { capitalizeWords } from '@/lib/utils';
 import { LuLoader2 } from 'react-icons/lu';
-import { CiUser } from 'react-icons/ci';
+import zxcvbn from 'zxcvbn'
+import { PasswordStrengthBar } from '@/components/auth/password-strength-bar';
+import usePasswordStrength from '@/hooks/ues-password-strength';
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>('');
@@ -39,6 +41,10 @@ export const RegisterForm = () => {
         });
     });
   };
+
+  const password = form.watch('password'); // Watch password field
+  const passwordScore = usePasswordStrength(password || ''); // Use custom hook
+
   return (
     <CardWrapper
       headerLabel="Create an account"
@@ -65,7 +71,6 @@ export const RegisterForm = () => {
                       placeholder="John Doe"
                       type="name"
                       className="capitalize"
-                      // icon={<CiUser />}
                       onChange={(event) => field.onChange(capitalizeWords(event.target.value))}
                     />
                   </FormControl>
@@ -111,7 +116,11 @@ export const RegisterForm = () => {
                 </FormItem>
               )}
             />
+            {form.watch().password?.length > 0 && (
+              <PasswordStrengthBar passwordScore={passwordScore} />
+            )
 
+            }
             <FormField
               control={form.control}
               name="confirmPassword"
