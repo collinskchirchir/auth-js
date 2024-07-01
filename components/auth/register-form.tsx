@@ -13,7 +13,6 @@ import { FormSuccess } from '@/components/form-success';
 import { register } from '@/actions/register';
 import { capitalizeWords } from '@/lib/utils';
 import { LuLoader2 } from 'react-icons/lu';
-import zxcvbn from 'zxcvbn'
 import { PasswordStrengthBar } from '@/components/auth/password-strength-bar';
 import usePasswordStrength from '@/hooks/ues-password-strength';
 
@@ -27,6 +26,7 @@ export const RegisterForm = () => {
       email: '',
       password: '',
       name: '',
+      confirmPassword: ''
     },
   });
 
@@ -36,8 +36,11 @@ export const RegisterForm = () => {
     startTransition(() => {
       register(values)
         .then((data) => {
+          if (data?.success) {
+            form.reset();
+            setSuccess(data.success);
+          }
           setError(data.error);
-          setSuccess(data.success);
         });
     });
   };
